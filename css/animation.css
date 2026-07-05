@@ -1,0 +1,422 @@
+/* ================================================
+   ANIMATION KEYFRAMES
+   ================================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideLeft {
+    from {
+        transform: translateX(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideRight {
+    from {
+        transform: translateX(-30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes scaleOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(37, 99, 235, 1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* ================================================
+   AOS (Animate On Scroll) ANIMATIONS
+   ================================================ */
+
+[data-aos] {
+    opacity: 0;
+    animation-duration: 800ms;
+    animation-fill-mode: both;
+}
+
+[data-aos="fade-up"] {
+    animation-name: slideUp;
+}
+
+[data-aos="fade-down"] {
+    animation-name: slideDown;
+}
+
+[data-aos="fade-left"] {
+    animation-name: slideLeft;
+}
+
+[data-aos="fade-right"] {
+    animation-name: slideRight;
+}
+
+[data-aos="zoom-in"] {
+    animation-name: scaleIn;
+}
+
+[data-aos="zoom-out"] {
+    animation-name: scaleOut;
+}
+
+/* ================================================
+   DELAY ANIMATIONS
+   ================================================ */
+
+[data-aos-delay="100"] {
+    animation-delay: 100ms;
+}
+
+[data-aos-delay="200"] {
+    animation-delay: 200ms;
+}
+
+[data-aos-delay="300"] {
+    animation-delay: 300ms;
+}
+
+[data-aos-delay="400"] {
+    animation-delay: 400ms;
+}
+
+[data-aos-delay="500"] {
+    animation-delay: 500ms;
+}
+
+/* ================================================
+   HOVER ANIMATIONS
+   ================================================ */
+
+.hover-lift {
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.hover-scale {
+    transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-rotate {
+    transition: transform var(--transition-base);
+}
+
+.hover-rotate:hover {
+    transform: rotate(5deg);
+}
+
+.hover-glow {
+    transition: box-shadow var(--transition-base);
+}
+
+.hover-glow:hover {
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+}
+
+/* ================================================
+   BUTTON ANIMATIONS
+   ================================================ */
+
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width var(--transition-base), height var(--transition-base);
+}
+
+.btn-ripple:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ================================================
+   LOADING ANIMATIONS
+   ================================================ */
+
+.skeleton {
+    background: linear-gradient(90deg, var(--surface-secondary) 25%, var(--surface) 50%, var(--surface-secondary) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+.skeleton-text {
+    height: 12px;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+}
+
+.skeleton-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.skeleton-card {
+    height: 300px;
+    border-radius: var(--radius-lg);
+}
+
+/* ================================================
+   TOAST ANIMATIONS
+   ================================================ */
+
+.toast {
+    animation: slideUp 300ms ease-out;
+}
+
+.toast.closing {
+    animation: slideDown 300ms ease-out;
+}
+
+/* ================================================
+   PAGE TRANSITION
+   ================================================ */
+
+.page-transition-enter {
+    animation: fadeIn 500ms ease-out;
+}
+
+.page-transition-exit {
+    animation: fadeOut 500ms ease-out;
+}
+
+/* ================================================
+   TYPING ANIMATION
+   ================================================ */
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.typing {
+    overflow: hidden;
+    border-right: 2px solid var(--primary);
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink 0.75s step-end infinite;
+}
+
+/* ================================================
+   GRADIENT ANIMATIONS
+   ================================================ */
+
+.gradient-animated {
+    background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+    background-size: 300% 300%;
+    animation: gradient 15s ease infinite;
+}
+
+/* ================================================
+   PARALLAX EFFECT
+   ================================================ */
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ================================================
+   FLIP CARD ANIMATION
+   ================================================ */
+
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.flip-card-back {
+    background-color: var(--primary);
+    color: white;
+    transform: rotateY(180deg);
+}
