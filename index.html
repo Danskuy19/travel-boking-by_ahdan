@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelHub - Premium Travel Booking Platform</title>
+    <meta name="description" content="Discover amazing destinations and book your perfect travel experience with TravelHub">
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%232563eb'>✈</text></svg>">
+</head>
+<body>
+    <!-- Offline Detection -->
+    <div id="offline-banner" class="offline-banner" style="display: none;">
+        <i class="fas fa-wifi-slash"></i> You are offline. Some features may be limited.
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <div class="navbar-logo">
+                <a href="/">
+                    <i class="fas fa-plane"></i>
+                    <span>TravelHub</span>
+                </a>
+            </div>
+
+            <!-- Menu Toggle -->
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <!-- Menu Items -->
+            <ul class="navbar-menu" id="navbar-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="pages/destinations.html">Destinations</a></li>
+                <li><a href="pages/hotels.html">Hotels</a></li>
+                <li><a href="pages/gallery.html">Gallery</a></li>
+                <li><a href="pages/testimonials.html">Testimonials</a></li>
+                <li><a href="pages/about.html">About</a></li>
+                <li><a href="pages/contact.html">Contact</a></li>
+            </ul>
+
+            <!-- Right Section -->
+            <div class="navbar-right">
+                <!-- Search -->
+                <div class="navbar-search">
+                    <input 
+                        type="text" 
+                        placeholder="Search destination..." 
+                        id="navbar-search-input"
+                        class="search-input"
+                    >
+                    <i class="fas fa-search"></i>
+                    <div class="search-suggestions" id="search-suggestions"></div>
+                </div>
+
+                <!-- Dark Mode Toggle -->
+                <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+
+                <!-- Favorites -->
+                <a href="#favorites-modal" class="navbar-icon" id="favorites-btn">
+                    <i class="fas fa-heart"></i>
+                    <span class="badge" id="favorites-count">0</span>
+                </a>
+
+                <!-- Login -->
+                <button class="btn-login" id="login-btn">Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Background Carousel -->
+        <div class="hero-background">
+            <div class="hero-carousel">
+                <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=600&fit=crop')"></div>
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&h=600&fit=crop')"></div>
+                <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1516299726423-6da5f01c0aa3?w=1200&h=600&fit=crop')"></div>
+            </div>
+            <div class="hero-overlay"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <!-- Promo Banner -->
+            <div class="promo-banner" id="promo-banner">
+                <i class="fas fa-gift"></i>
+                <span>Special Offer: Get <strong>30% OFF</strong> on your first booking! Code: TRAVEL30</span>
+                <button class="promo-close" id="promo-close">&times;</button>
+            </div>
+
+            <h1 class="hero-title">
+                Discover Your Next Adventure
+            </h1>
+            
+            <p class="hero-subtitle">
+                Explore stunning destinations worldwide and create unforgettable memories
+            </p>
+
+            <!-- Search Booking Form -->
+            <form class="search-booking-form" id="search-booking-form">
+                <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <input 
+                        type="text" 
+                        id="destination" 
+                        placeholder="Where to?" 
+                        required
+                        list="destinations-list"
+                    >
+                    <datalist id="destinations-list">
+                        <option value="Bali, Indonesia">
+                        <option value="Paris, France">
+                        <option value="Tokyo, Japan">
+                        <option value="New York, USA">
+                        <option value="Dubai, UAE">
+                    </datalist>
+                </div>
+
+                <div class="form-group">
+                    <label for="check-in">Check In</label>
+                    <input 
+                        type="date" 
+                        id="check-in" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="check-out">Check Out</label>
+                    <input 
+                        type="date" 
+                        id="check-out" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Guests</label>
+                    <select id="guests" required>
+                        <option value="">Select guests</option>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5+ Guests</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="room-type">Room Type</label>
+                    <select id="room-type" required>
+                        <option value="">Select room type</option>
+                        <option value="single">Single Room</option>
+                        <option value="double">Double Room</option>
+                        <option value="suite">Suite</option>
+                        <option value="villa">Villa</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-primary btn-search">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </form>
+
+            <!-- Animated Statistics -->
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-number" data-target="15000">0</div>
+                    <div class="stat-label">Happy Travelers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Destinations</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="1200">0</div>
+                    <div class="stat-label">Hotels</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-label">% Satisfaction</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel Controls -->
+        <button class="carousel-control prev" id="carousel-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-control next" id="carousel-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators">
+            <button class="indicator active" data-index="0"></button>
+            <button class="indicator" data-index="1"></button>
+            <button class="indicator" data-index="2"></button>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="section popular-destinations">
+        <div class="container">
+            <div class="section-header">
+                <h2>Popular Destinations</h2>
+                <p>Explore the most visited places in the world</p>
+            </div>
+
+            <div class="destinations-grid" id="destinations-grid">
+                <!-- Destinations will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Hotels -->
+    <section class="section featured-hotels">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Hotels</h2>
+                <p>Handpicked luxury accommodations for your comfort</p>
+            </div>
+
+            <div class="hotels-grid" id="hotels-grid">
+                <!-- Hotels will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose TravelHub?</h2>
+                <p>Experience the best travel booking platform</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure Booking</h3>
+                    <p>Your transactions are protected with SSL encryption and secure payment gateways.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>24/7 Support</h3>
+                    <p>Our dedicated support team is always ready to help you with any queries.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <h3>Best Prices</h3>
+                    <p>We offer competitive prices and exclusive deals on accommodations worldwide.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-location-dot"></i>
+                    </div>
+                    <h3>Wide Selection</h3>
+                    <p>Choose from thousands of hotels, resorts, and unique accommodations.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Fast Booking</h3>
+                    <p>Complete your booking in just a few clicks with our intuitive interface.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Best Reviews</h3>
+                    <p>Read genuine reviews from travelers to make informed decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Preview -->
+    <section class="section testimonials-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Travelers Say</h2>
+                <p>Real stories from satisfied customers</p>
+            </div>
+
+            <div class="testimonials-slider" id="testimonials-slider">
+                <!-- Testimonials will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Subscribe to Our Newsletter</h2>
+                <p>Get exclusive deals, travel tips, and updates delivered to your inbox</p>
+                
+                <form class="newsletter-form" id="newsletter-form">
+                    <input 
+                        type="email" 
+                        placeholder="Enter your email" 
+                        id="newsletter-email"
+                        required
+                    >
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Countdown Promo -->
+    <section class="section countdown-promo" id="countdown-section">
+        <div class="container">
+            <div class="countdown-content">
+                <h2>Flash Sale Ends In:</h2>
+                <div class="countdown-timer" id="countdown-timer">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">Minutes</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">Seconds</span>
+                    </div>
+                </div>
+                <a href="pages/hotels.html" class="btn-primary btn-lg">Shop Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Column 1: About -->
+                <div class="footer-column">
+                    <h3>TravelHub</h3>
+                    <p>Your trusted partner in discovering the world's most beautiful destinations.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Quick Links -->
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="pages/destinations.html">Destinations</a></li>
+                        <li><a href="pages/hotels.html">Hotels</a></li>
+                        <li><a href="pages/about.html">About Us</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Support -->
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Booking FAQs</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-column">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-phone"></i> +1 (800) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@travelhub.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Travel Street, World City</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 TravelHub. All rights reserved. | Designed with <i class="fas fa-heart"></i> by Front-End Engineers</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Floating Chat Button -->
+    <div class="floating-chat" id="floating-chat">
+        <button class="chat-toggle" id="chat-toggle">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chat-widget" id="chat-widget" style="display: none;">
+            <div class="chat-header">
+                <h4>Chat with Us</h4>
+                <button class="chat-close" id="chat-close">&times;</button>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="chat-message bot">
+                    <p>Hi! 👋 How can we help you today?</p>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Type your message..." id="chat-input">
+                <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div class="modal" id="favorites-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>My Favorites</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="favorites-modal-body">
+                <!-- Favorites will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content modal-sm">
+            <div class="modal-header">
+                <h2>Login</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-primary btn-block">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loader"></div>
+        <p>Loading your adventure...</p>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- JavaScript -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/booking.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

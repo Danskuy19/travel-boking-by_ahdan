@@ -1,0 +1,19 @@
+{
+  "name": "travel-booking-platform",
+  "version": "1.0.0",
+  "description": "A premium travel booking platform built with vanilla HTML, CSS, and JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "build": "echo 'No build step needed for vanilla JS'"
+  },
+  "keywords": [
+    "travel",
+    "booking",
+    "hotel",
+    "destinations",
+    "vanilla-js"
+  ],
+  "author": "Front-End Engineer",
+  "license": "MIT"
+}
